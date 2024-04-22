@@ -79,7 +79,7 @@ function parse_command_line_arguments() {
 }
 
 function clone_and_checkout_repository() {
-  TARGET_REPO_URL="https://github.com/instant-bqml/crmint.git"
+  TARGET_REPO_URL="https://github.com/THTuong/crmint.git"
   TARGET_REPO_NAME="crmint"
   CLONE_DIR="$HOME/$TARGET_REPO_NAME"
 
