@@ -1,7 +1,7 @@
 from jobs.workers import worker
 from jobs.workers.fb import fb_utils
 
-class FBEmptyAudienceCreate():
+class FBEmptyAudienceCreate(worker.BQWorker):
     PARAMS = [
         ('account_id', 'string', True, 'Ads Account Id'),
         ('app_id', 'string', True, 'FB App Id'),
