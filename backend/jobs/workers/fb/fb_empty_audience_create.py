@@ -3,12 +3,12 @@ from jobs.workers.fb import fb_utils
 
 class FBEmptyAudienceCreate(worker.Worker):
     PARAMS = [
-        ('account_id', 'string', True, 'Ads Account Id'),
-        ('app_id', 'string', True, 'FB App Id'),
-        ('app_secret', 'string', True, 'FB App Secret'),
-        ('access_token', 'string', True, 'Access Token'),  # Added comma here
-        ('audience_name', 'string', True, 'Audience Name'),
-        ('audience_description', 'string', True, 'Audience Description')
+        ('account_id', 'string', True, '','Ads Account Id'),
+        ('app_id', 'string', True, '','FB App Id'),
+        ('app_secret', 'string', True, '','FB App Secret'),
+        ('access_token', 'string', True, '','Access Token'),  # Added comma here
+        ('audience_name', 'string', True, '','Audience Name'),
+        ('audience_description', 'string', True, '','Audience Description')
     ]
     
     def _execute(self) -> None:
