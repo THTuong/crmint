@@ -35,6 +35,7 @@ auth_filter.add(app)
 
 @app.route('/api/workers', methods=['GET'])
 def workers_list():
+  print(json.jsonify(list(finder.WORKERS_MAPPING.keys())))
   return (json.jsonify(list(finder.WORKERS_MAPPING.keys())),
           {'Access-Control-Allow-Origin': '*'})
 

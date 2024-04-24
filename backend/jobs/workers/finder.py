@@ -47,7 +47,6 @@ WORKERS_MAPPING = {
     # 'AutoMLPredictor',
     # 'AutoMLTrainer',
     'FBEmptyAudienceCreator': fb_empty_audience_create.FBEmptyAudienceCreate,
-    'BQTest': bq_test.BQTest,
     'BQMLTrainer':
         bq_ml_trainer.BQMLTrainer,
     'BQQueryLauncher':
