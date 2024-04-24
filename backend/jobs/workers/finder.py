@@ -37,7 +37,6 @@ from jobs.workers.vertexai import vertexai_batch_predictor_to_bq
 from jobs.workers.vertexai import vertexai_tabular_trainer
 from jobs.workers.vertexai import vertexai_waiter
 from jobs.workers.vertexai import vertexai_worker
-from jobs.workers.bigquery import bq_test
 from jobs.workers.fb import fb_empty_audience_create
 
 ConcreteWorker = TypeVar('ConcreteWorker', bound=worker.Worker)
