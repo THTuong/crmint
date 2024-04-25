@@ -38,6 +38,7 @@ from jobs.workers.vertexai import vertexai_tabular_trainer
 from jobs.workers.vertexai import vertexai_waiter
 from jobs.workers.vertexai import vertexai_worker
 from jobs.workers.fb import fb_empty_audience_create
+from jobs.workers.fb import fb_audiences_updater
 
 ConcreteWorker = TypeVar('ConcreteWorker', bound=worker.Worker)
 
@@ -45,6 +46,7 @@ WORKERS_MAPPING = {
     # 'AutoMLImporter',
     # 'AutoMLPredictor',
     # 'AutoMLTrainer',
+    'FbAudiencesUpdater': fb_audiences_updater.FbAudiencesUpdater,
     'FBEmptyAudienceCreator': fb_empty_audience_create.FBEmptyAudienceCreate,
     'BQMLTrainer':
         bq_ml_trainer.BQMLTrainer,
