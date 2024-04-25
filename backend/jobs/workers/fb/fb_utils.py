@@ -69,7 +69,18 @@ def get_audience_patches(bq_client: bigquery.Client, table_ref: bigquery.TableRe
 
 #Update audience
 def update_audience(app_id: str, app_secret: str, access_token: str, audience_id: str, patches: list[AudiencePatch]) -> None:
-    """Initialize the Facebook API client."""
+    """Creates an empty custom audience using Facebook API.
+    Args:
+    audience_id: The audience ID
+    app_id: The app id of the Facebook developer app
+    app_secret: The app secret of the Facebook developer app
+    access_token: The access token of the Facebook developer app
+    bq_project_id: The BigQuery project ID
+    bq_dataset_id: The dataset ID
+    bq_table_id: The table ID
+    schema: the define of schema
+    data: data param
+    """
     try:
         init_facebook_api(app_id, app_secret, access_token)
         audience = CustomAudience('{audience_id}')

@@ -46,7 +46,7 @@ WORKERS_MAPPING = {
     # 'AutoMLImporter',
     # 'AutoMLPredictor',
     # 'AutoMLTrainer',
-    'FbAudiencesUpdater': fb_audiences_updater.FbAudiencesUpdater,
+    'FBAudiencesUpdater': fb_audiences_updater.FbAudiencesUpdater,
     'FBEmptyAudienceCreator': fb_empty_audience_create.FBEmptyAudienceCreate,
     'BQMLTrainer':
         bq_ml_trainer.BQMLTrainer,
