@@ -39,13 +39,14 @@ from jobs.workers.vertexai import vertexai_waiter
 from jobs.workers.vertexai import vertexai_worker
 from jobs.workers.fb import fb_empty_audience_create
 from jobs.workers.fb import fb_audiences_updater
-
+from jobs.workers.bigquery import bq_loop
 ConcreteWorker = TypeVar('ConcreteWorker', bound=worker.Worker)
 
 WORKERS_MAPPING = {
     # 'AutoMLImporter',
     # 'AutoMLPredictor',
     # 'AutoMLTrainer',
+    'BQLoop': bq_loop.BQLoop,
     'FBAudiencesUpdater': fb_audiences_updater.FbAudiencesUpdater,
     'FBEmptyAudienceCreator': fb_empty_audience_create.FBEmptyAudienceCreate,
     'BQMLTrainer':
