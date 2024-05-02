@@ -181,4 +181,3 @@ facebook-business==19.0.3
     # Facebook-specific library
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
-requests==2.31.0
