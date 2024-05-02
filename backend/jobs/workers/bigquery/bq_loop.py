@@ -60,13 +60,15 @@ class BQLoop(bq_worker.BQWorker):
       location=location,
       job_id_prefix=self._get_prefix())
     self._wait(job)
-    # results = job.result()
-    # for row in results:
-    #   data = json.loads(row['pipeline'])
+    results = job.result()
+    for row in results:
+      data = json.loads(row['pipeline'])
+      data2 = json.loads(json.loads(row['pipeline']))
     #   pipeline = models.Pipeline(name=data['name'])
     #   pipeline.save()
     #   pipeline.import_data(data)
-    #   self.log_info(type(data))
+      self.log_info(type(data))
+      self.log_info(type(data2))
   def _execute(self) -> None:
     self.execute_script(self._params['script'],
                         self._params['bq_dataset_location'])
