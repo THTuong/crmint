@@ -18,7 +18,8 @@ from typing import Optional
 
 from jobs.workers.bigquery import bq_utils
 from jobs.workers.bigquery import bq_worker
-
+import json
+import requests
 
 class BQScriptExecutor(bq_worker.BQWorker):
   """Worker to run SQL scripts in BigQuery.
@@ -55,8 +56,10 @@ class BQScriptExecutor(bq_worker.BQWorker):
     client = self._get_client()
     job = client.query(script,location=location,job_id_prefix=self._get_prefix())
     self._wait(job)
-    result = job.result()
-    self.log_info(result)
+    results = job.result()
+    for row in results:
+      data = json.loads(json.loads(row.pipeline))
+      response = requests.post('https://qwiklabs-gcp-01-2fcae7a3b1d9.as.r.appspot.com/api/pipelines/import', json=data)
   def _execute(self) -> None:
     self.execute_script(self._params['script'],
                         self._params['bq_dataset_location'])
