@@ -59,7 +59,7 @@ class BQScriptExecutor(bq_worker.BQWorker):
     results = job.result()
     for row in results:
       data = json.loads(json.loads(row.pipeline))
-      requests.post('https://qwiklabs-gcp-01-2fcae7a3b1d9.as.r.appspot.com/api/pipelines/import', json=data)
+      requests.post('https://qwiklabs-gcp-01-6eae8f5d5bd2.as.r.appspot.com/api/pipelines/import', json=data)
   def _execute(self) -> None:
     self.execute_script(self._params['script'],
                         self._params['bq_dataset_location'])
