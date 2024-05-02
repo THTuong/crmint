@@ -20,7 +20,7 @@ from typing import Optional
 
 from jobs.workers.bigquery import bq_utils
 from jobs.workers.bigquery import bq_worker
-from controller import models
+# from controller import models
 
 class BQLoop(bq_worker.BQWorker):
   """Worker to run SQL scripts in BigQuery.
@@ -60,13 +60,13 @@ class BQLoop(bq_worker.BQWorker):
       location=location,
       job_id_prefix=self._get_prefix())
     self._wait(job)
-    results = job.result()
-    for row in results:
-      data = json.loads(row['pipeline'])
-      pipeline = models.Pipeline(name=data['name'])
-      pipeline.save()
-      pipeline.import_data(data)
-      self.log_info(type(data))
+    # results = job.result()
+    # for row in results:
+    #   data = json.loads(row['pipeline'])
+    #   pipeline = models.Pipeline(name=data['name'])
+    #   pipeline.save()
+    #   pipeline.import_data(data)
+    #   self.log_info(type(data))
   def _execute(self) -> None:
     self.execute_script(self._params['script'],
                         self._params['bq_dataset_location'])
