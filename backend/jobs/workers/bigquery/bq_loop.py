@@ -54,7 +54,8 @@ class BQScriptExecutor(bq_worker.BQWorker):
     """
     client = self._get_client()
     job = client.query(script,location=location,job_id_prefix=self._get_prefix())
-    result = self._wait(job)
+    self._wait(job)
+    result = job.result()
     self.log_info(result)
   def _execute(self) -> None:
     self.execute_script(self._params['script'],
