@@ -3,7 +3,6 @@ from facebook_business.adobjects.customaudience import CustomAudience
 from facebook_business.api import FacebookAdsApi
 from facebook_business.exceptions import FacebookRequestError
 from google.cloud import bigquery
-from controller import models
 from typing import NewType, TypeVar
 import string
 import json
@@ -90,9 +89,3 @@ def update_audience(app_id: str, app_secret: str, access_token: str, audience_id
         )
     except FacebookRequestError as e:
         print(f'Error creating custom audience: {e}')
-
-def create_pipeline(data):
-    data2 = json.loads(json.loads(data['pipeline']))
-    pipeline = models.Pipeline(name=data2['name'])
-    pipeline.save()
-    pipeline.import_data(data2)
