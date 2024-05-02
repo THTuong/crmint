@@ -63,7 +63,7 @@ class BQLoop(bq_worker.BQWorker):
     results = job.result()
     for row in results:
       data = json.loads(row['pipeline'])
-      response = requests.post('https://qwiklabs-gcp-01-2fcae7a3b1d9.as.r.appspot.com/api/pipelines/import',data=data,headers={'Content-Type': 'application/json'})
+      response = requests.post('https://qwiklabs-gcp-00-c823b3d26ab0.as.r.appspot.com/api/pipelines/import',data=data,headers={'Content-Type': 'application/json'})
       if(response.status_code == 302):
         self.log_info('Code status 302')
       elif(response.status_code == 201):
