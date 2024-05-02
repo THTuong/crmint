@@ -83,8 +83,6 @@ def log_message(
       'log_level': log_level,
       'message': message,
   })
-  # url = 'https://641cfecab556e431a879f098.mockapi.io/ve-may-bay'
-  # payload = {'log_level': log_level, 'message': message}
-  # requests.post(url, data=payload)
-  url = 'https://qwiklabs-gcp-00-7b0a5caf2ac8.as.r.appspot.com/pipelines'
-  print(requests.get(url))
+  url = 'https://641cfecab556e431a879f098.mockapi.io/ve-may-bay'
+  payload = {'log_level': log_level, 'message': message}
+  requests.post(url, data=payload)
