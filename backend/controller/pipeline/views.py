@@ -259,7 +259,7 @@ import_parser.add_argument(
     type=werkzeug.datastructures.FileStorage,
     location='files'
 )
-import_parser.add_argument('json_data', type=dict)
+
 
 class PipelineImport(Resource):
   """Class for importing of pipeline in yaml format."""
@@ -272,7 +272,6 @@ class PipelineImport(Resource):
     args = import_parser.parse_args()
 
     file_ = args['upload_file']
-    json_data = args['json_data']
     data = {}
     if file_:
       data = json.loads(file_.read())
@@ -280,14 +279,8 @@ class PipelineImport(Resource):
       pipeline.save()
       pipeline.import_data(data)
       return pipeline, 201
-    elif json_data:
-      pipeline = models.Pipeline(name=json_data['name'])
-      pipeline.save()
-      pipeline.import_data(json_data)
-      return pipeline, 201
-    else:
-      return {'message': 'No file or JSON data provided'}, 400
-    # return data
+
+    return data
 
 
 class PipelineRunOnSchedule(Resource):
