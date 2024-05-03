@@ -27,3 +27,4 @@ entrypoint: gunicorn -b :$PORT -w 2 -k gthread --threads 4 jobs_app:app
 handlers:
 - url: /.*
   script: auto
+  secure: always
