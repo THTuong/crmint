@@ -22,8 +22,6 @@ from google.auth import credentials
 
 from common import crmint_logging
 
-from controller.pipeline import views
-
 _DEFAULT_MAX_RETRIES = 3
 
 # TODO(dulacp): Change this exception name to `WorkerError`
