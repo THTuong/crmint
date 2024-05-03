@@ -6,7 +6,6 @@ from google.cloud import bigquery
 from typing import NewType, TypeVar
 import string
 import json
-from backend.controller import models
 
 #Define some variable
 class AudienceOperationBase:
