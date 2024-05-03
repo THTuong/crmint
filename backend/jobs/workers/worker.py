@@ -17,14 +17,14 @@
 
 import json
 from typing import Any, Optional
-from controller import models
 from google.api_core.retry import Retry
 from google.auth import credentials
 
 from common import crmint_logging
 
-_DEFAULT_MAX_RETRIES = 3
+from controller.pipeline import views
 
+_DEFAULT_MAX_RETRIES = 3
 
 # TODO(dulacp): Change this exception name to `WorkerError`
 class WorkerException(Exception):  # pylint: disable=too-few-public-methods
