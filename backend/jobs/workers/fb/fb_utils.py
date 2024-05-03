@@ -6,8 +6,7 @@ from google.cloud import bigquery
 from typing import NewType, TypeVar
 import string
 import json
-from common import crmint_logging
-from common import utils
+from backend.controller import models
 
 #Define some variable
 class AudienceOperationBase:
