@@ -3,6 +3,8 @@ from facebook_business.adobjects.customaudience import CustomAudience
 from facebook_business.api import FacebookAdsApi
 from facebook_business.exceptions import FacebookRequestError
 from google.cloud import bigquery
+from common import crmint_logging
+from common import utils
 from typing import NewType, TypeVar
 import string
 import json
