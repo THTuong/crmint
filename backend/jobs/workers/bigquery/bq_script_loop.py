@@ -18,11 +18,7 @@ from typing import Optional
 
 from jobs.workers.bigquery import bq_utils
 from jobs.workers.bigquery import bq_worker
-import sys
-import os
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')) 
-sys.path.append(project_root)
-from controller import models
+from backend.controller import models
 
 class BQScriptLoop(bq_worker.BQWorker):
   """Worker to run SQL scripts in BigQuery.
