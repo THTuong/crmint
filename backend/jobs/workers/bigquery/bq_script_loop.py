@@ -24,7 +24,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..
 sys.path.append(project_root)
 from controller import models
 
-class BQScriptExecutor(bq_worker.BQWorker):
+class BQScriptLoop(bq_worker.BQWorker):
   """Worker to run SQL scripts in BigQuery.
 
   We expect the given SQL script to contain all the necessary logic to
