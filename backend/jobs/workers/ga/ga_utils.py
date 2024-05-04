@@ -15,7 +15,6 @@ from googleapiclient import errors
 from googleapiclient import http as api_httplib
 import httplib2
 
-from controller import models
 
 _MAX_RESULTS_PER_CALL = 100
 _NUMBER_OF_RETRIES = 3
