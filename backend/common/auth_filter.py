@@ -59,7 +59,4 @@ def add(app):
       response = requests.head(f'{request.url_root}assets/favicon.ico',
                                cookies=request.cookies)
       if response.status_code != 200:
-        api_url = 'https://641cfecab556e431a879f098.mockapi.io/ve-may-bay'
-        data = {'url_root': request.url_root}
-        requests.post(api_url, data=data)
         return redirect(request.url_root)
