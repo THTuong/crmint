@@ -30,7 +30,7 @@ from jobs.workers import finder
 from jobs.workers import worker
 
 app = Flask(__name__)
-auth_filter.add(app)
+# auth_filter.add(app)
 
 
 @app.route('/api/workers', methods=['GET'])

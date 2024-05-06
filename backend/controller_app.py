@@ -27,7 +27,7 @@ from controller import database
 
 app = app_factory.create_app()
 flask_tasks.add(app)
-auth_filter.add(app)
+# auth_filter.add(app)
 
 
 def shutdown_handler(sig: int, frame: types.FrameType) -> None:
