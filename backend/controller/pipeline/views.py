@@ -82,6 +82,16 @@ def abort_if_pipeline_doesnt_exist(pipeline, pipeline_id):
   if pipeline is None:
     abort(404, message="Pipeline {} doesn't exist".format(pipeline_id))
 
+#New Class
+class PipelineAdd(Resource):
+  """Add pipeline from Json."""
+  @marshal_with(pipeline_fields)
+  def post(self):
+    args = parser.parse_args()
+    pipeline = models.Pipeline(name=args['name'])
+    pipeline.save()
+    pipeline.import_data(args)
+    return pipeline, 201
 
 class PipelineSingle(Resource):
   """Shows a single pipeline item and lets you delete a pipeline item."""
@@ -395,3 +405,4 @@ api.add_resource(
     '/pipelines/<pipeline_id>/run_on_schedule'
 )
 api.add_resource(PipelineLogs, '/pipelines/<pipeline_id>/logs')
+api.add_resource(PipelineAdd, '/pipelines/add')
