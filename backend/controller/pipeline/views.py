@@ -87,10 +87,10 @@ class PipelineAdd(Resource):
   """Add pipeline from Json."""
   @marshal_with(pipeline_fields)
   def post(self):
-    args = parser.parse_args()
-    pipeline = models.Pipeline(name=args['name'])
+    data = flask.request.get_json()
+    pipeline = models.Pipeline(name=data['name'])
     pipeline.save()
-    pipeline.import_data(args)
+    pipeline.import_data(data)
     return pipeline, 201
 
 class PipelineSingle(Resource):
