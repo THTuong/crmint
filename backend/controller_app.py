@@ -24,10 +24,10 @@ from common import crmint_logging
 from common import message
 from controller import app as app_factory
 from controller import database
-
+from common import auth_api
 app = app_factory.create_app()
 flask_tasks.add(app)
-# auth_filter.add(app)
+auth_api.add(app)
 
 
 def shutdown_handler(sig: int, frame: types.FrameType) -> None:
