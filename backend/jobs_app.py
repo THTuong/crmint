@@ -28,9 +28,8 @@ from common import result
 from common import task
 from jobs.workers import finder
 from jobs.workers import worker
-from common import auth_api
+
 app = Flask(__name__)
-auth_api.add(app)
 
 
 @app.route('/api/workers', methods=['GET'])
