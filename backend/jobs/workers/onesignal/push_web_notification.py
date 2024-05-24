@@ -13,7 +13,8 @@ class PushWebNotification(bq_worker.BQWorker):
 
     def _execute(self) -> None:
         headers = {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Basic MWZhMjQ3NDQtY2FhMy00MzUzLWIyMzctMDVjYjkyMWJmNzRl"
         }
         
         payload = {
