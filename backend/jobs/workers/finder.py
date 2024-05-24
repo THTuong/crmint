@@ -39,6 +39,7 @@ from jobs.workers.vertexai import vertexai_waiter
 from jobs.workers.vertexai import vertexai_worker
 from jobs.workers.fb import fb_empty_audience_create
 from jobs.workers.fb import fb_audiences_updater
+from jobs.workers.onesignal import push_web_notification
 
 ConcreteWorker = TypeVar('ConcreteWorker', bound=worker.Worker)
 
@@ -46,6 +47,7 @@ WORKERS_MAPPING = {
     # 'AutoMLImporter',
     # 'AutoMLPredictor',
     # 'AutoMLTrainer',
+    'WebPushNotification': push_web_notification.PushWebNotification,
     'FBAudiencesUpdater': fb_audiences_updater.FbAudiencesUpdater,
     'FBEmptyAudienceCreator': fb_empty_audience_create.FBEmptyAudienceCreate,
     'BQMLTrainer':
