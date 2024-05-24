@@ -1,7 +1,7 @@
 import requests
 import json
 
-def send_notification(app_id, subscription_ids, data_str, contents_str, headings_str, image_url, target_url):
+def send_notification(app_id, subscription_ids, data_str, contents_str, headings_str, image_url, url):
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Basic MWZhMjQ3NDQtY2FhMy00MzUzLWIyMzctMDVjYjkyMWJmNzRl"
@@ -19,7 +19,7 @@ def send_notification(app_id, subscription_ids, data_str, contents_str, headings
         "contents": contents,
         "headings": headings,
         "chrome_web_image": image_url,
-        "url": target_url
+        "url": url
     }
 
     response = requests.post('https://onesignal.com/api/v1/notifications', headers=headers, json=payload)
