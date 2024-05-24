@@ -9,7 +9,7 @@ class PushWebNotification(bq_worker.BQWorker):
         ('include_subscription_ids', 'string', True, '', 'Subscription IDs'),
         ('contents', 'text', True, '', 'Content of notification'),
         ('chrome_web_image', 'string', True, '', 'Image of notification'),
-        ('headings', 'text', True, '', 'Title of notification'),
+        ('headings_str', 'text', True, '', 'Title of notification'),
         ('url', 'string', True, '', 'URL of notification')
     ]
 
@@ -17,4 +17,4 @@ class PushWebNotification(bq_worker.BQWorker):
         os_utils.send_notification(self._params['app_id'],
             self._params['include_subscription_ids'],
             self._params['contents'],
-            self._params['chrome_web_image'],self._params['headings'],self._params['url'])
+            self._params['chrome_web_image'],self._params['headings_str'],self._params['url'])
