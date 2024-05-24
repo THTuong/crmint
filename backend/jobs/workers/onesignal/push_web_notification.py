@@ -26,4 +26,4 @@ class PushWebNotification(bq_worker.BQWorker):
             "url": self._params['url']
         }
         response = requests.post('https://onesignal.com/api/v1/notifications', headers=headers, json=payload)
-        self.log_info(response)
+        self.log_info(response.status_code)
