@@ -1,24 +1,23 @@
 import requests
 import json
 
-def send_notification(app_id, subscription_ids, data_str, contents_str, headings_str, image_url, url):
+def send_notification(app_id, subscription_ids, contents_str, headings_str, chrome_web_image, url):
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Basic MWZhMjQ3NDQtY2FhMy00MzUzLWIyMzctMDVjYjkyMWJmNzRl"
     }
 
     # Convert input strings to dictionaries
-    data = json.loads(data_str)
+    # data = json.loads(data_str)
     contents = json.loads(contents_str)
     headings = json.loads(headings_str)
 
     payload = {
         "app_id": app_id,
         "include_subscription_ids": subscription_ids.split(","),
-        "data": data,
         "contents": contents,
         "headings": headings,
-        "chrome_web_image": image_url,
+        "chrome_web_image": chrome_web_image,
         "url": url
     }
 
