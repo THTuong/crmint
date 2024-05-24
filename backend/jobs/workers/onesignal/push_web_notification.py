@@ -7,9 +7,9 @@ class PushWebNotification(bq_worker.BQWorker):
     PARAMS = [
         ('app_id', 'string', True, '634a14e3-11d3-48a5-bea6-42dcbcaf69b1', 'App ID'),
         ('include_subscription_ids', 'string', True, '', 'Subscription IDs'),
-        ('contents', 'string', True, '', 'Content of notification'),
+        ('contents', 'text', True, '', 'Content of notification'),
         ('chrome_web_image', 'string', True, '', 'Image of notification'),
-        ('headings', 'string', True, '', 'Title of notification'),
+        ('headings', 'text', True, '', 'Title of notification'),
         ('url', 'string', True, '', 'URL of notification')
     ]
 
