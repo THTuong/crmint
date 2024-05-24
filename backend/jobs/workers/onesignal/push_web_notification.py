@@ -16,5 +16,5 @@ class PushWebNotification(bq_worker.BQWorker):
     def _execute(self) -> None:
         os_utils.send_notification(self._params['app_id'],
             self._params['include_subscription_ids'],
-            self._params['contents'],
-            self._params['chrome_web_image'],self._params['headings_str'],self._params['url'])
+            self._params['contents'],self._params['headings_str'],
+            self._params['chrome_web_image'],self._params['url'])
