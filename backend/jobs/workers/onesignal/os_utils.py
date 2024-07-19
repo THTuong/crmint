@@ -1,5 +1,7 @@
 import requests
 import json
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import *
 
 def get_subscription_ids(api_url):
     response = requests.get(api_url)
@@ -46,54 +48,78 @@ def send_notification(app_id, subscription_ids, contents_str, headings_str, chro
         else:
             return {"error": "failed to push notification", "status_code": response.status_code, "response": response.json()}
 
-def send_email(api_id, from_email, from_name, reply_to_email, subject, contents, send_at):
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_id}"
-    }
-    # Construct the 'personalizations' field
-    personalizations = [
-        {
-            "form": {
-                "email": from_email,
-                "name": from_name
-            },
-            "to":{
-                
-            }
-        }
-    ]
-    data = {
-        "personalizations": personalizations,
-        "from": {
-            "email": from_email,
-            "name": from_name
-        },
-        "reply_to": {
-            "email": reply_to_email
-        },
-        "subject": subject,
-        "content": [
+def send_email(api_id, from_email, from_name, reply_to_email,segment, subject, contents, send_at):
+    segment = {
+        "data": [
             {
-                "type": "text/html",
-                "value": contents
-            }
+                "id": 28,
+                "attributes": {
+                    "user_pseudo_id": "1720789419",
+                    "createdAt": "2024-07-16T09:55:01.920Z",
+                    "updatedAt": "2024-07-19T03:49:45.276Z",
+                    "pii": [
+                        {
+                            "id": 2,
+                            "email": "haituong0101987@gmail.com",
+                            "first_name": "Tuong",
+                            "last_name": "Tran"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 32,
+                "attributes": {
+                    "user_pseudo_id": "1720548553",
+                    "createdAt": "2024-07-16T09:56:19.513Z",
+                    "updatedAt": "2024-07-19T03:56:23.449Z",
+                    "pii": [
+                        {
+                            "id": 4,
+                            "email": "haituong1703@gmail.com",
+                            "first_name": "Hai",
+                            "last_name": "Tuong"
+                        }
+                    ]
+                }
+            },
         ],
-        "tracking_settings": {
-            "click_tracking": {
-                "enable": True,
-                "enable_text": False
-            },
-            "open_tracking": {
-                "enable": True,
-                "substitution_tag": "%open-track%"
-            },
-            "subscription_tracking": {
-                "enable": False
+        "meta": {
+            "pagination": {
+            "page": 1,
+            "pageSize": 25,
+            "pageCount": 1,
+            "total": 3
             }
         }
     }
+    message = Mail()
+    to_emails = []
+    for user in segment['data']:
+        pii_list = user['attributes']['pii']
+        if pii_list:
+            for pii in pii_list:
+                email = pii.get('email')
+                first_name = pii.get('first_name', '')
+                last_name = pii.get('last_name', '')
+                if email:
+                    to_emails.append(To(email=email, name=f"{first_name} {last_name}".strip()))
+    message.to = to_emails
+    
+    # Extract email addresses from the segment
+    message.from_email = From(email=from_email, name=from_name)
+
+    # message.reply_to = ReplyTo(
+    #     email="customer_service@example.com",
+    #     name="Example Customer Service Team"
+    # )
+    if(reply_to_email):
+        message.reply_to = ReplyTo(email=reply_to_email)
+    message.subject = Subject(subject)
+    message.content = [Content(mime_type="text/html", content=contents)]
     if send_at:
-        data["send_at"] = send_at
-    response = requests.post("https://api.sendgrid.com/v3/mail/send", headers=headers, data=json.dumps(data))
+        message.send_at = SendAt(send_at)
+
+    sendgrid_client = SendGridAPIClient(api_id)
+    response = sendgrid_client.send(message)
     return response

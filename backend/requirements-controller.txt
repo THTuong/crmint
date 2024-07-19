@@ -201,6 +201,6 @@ urllib3==1.26.12
     #   requests
 werkzeug==2.0.3
     # via flask
-
+sendgrid==6.11.0
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
