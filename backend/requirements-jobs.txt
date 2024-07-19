@@ -179,5 +179,6 @@ werkzeug==2.0.3
     # via flask
 facebook-business==19.0.3
     # Facebook-specific library
+sendgrid==6.11.0
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
