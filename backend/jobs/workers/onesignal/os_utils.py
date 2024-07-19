@@ -48,7 +48,7 @@ def send_notification(app_id, subscription_ids, contents_str, headings_str, chro
         else:
             return {"error": "failed to push notification", "status_code": response.status_code, "response": response.json()}
 
-def send_email(api_id, from_email, from_name, reply_to_email,segment, subject, contents, send_at):
+def send_email(api_id, from_email, from_name, reply_to_email, subject, contents):
     segment = {
         "data": [
             {
@@ -117,8 +117,6 @@ def send_email(api_id, from_email, from_name, reply_to_email,segment, subject, c
         message.reply_to = ReplyTo(email=reply_to_email)
     message.subject = Subject(subject)
     message.content = [Content(mime_type="text/html", content=contents)]
-    if send_at:
-        message.send_at = SendAt(send_at)
 
     sendgrid_client = SendGridAPIClient(api_id)
     response = sendgrid_client.send(message)
