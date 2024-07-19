@@ -1,9 +1,7 @@
 from jobs.workers.bigquery import bq_worker
 from jobs.workers.onesignal import os_utils
-import requests
 
 class PushWebNotification(bq_worker.BQWorker):
-    """Worker to update FB audiences using values from a BigQuery table."""
     PARAMS = [
         ('app_id', 'string', True, 'fb5bd557-43ac-4655-a295-e009908a8b06', 'App ID'),
         ('include_subscription_ids', 'string', True, '', 'Subscription IDs'),

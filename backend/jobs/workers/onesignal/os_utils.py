@@ -45,3 +45,55 @@ def send_notification(app_id, subscription_ids, contents_str, headings_str, chro
             return status_response.json()
         else:
             return {"error": "failed to push notification", "status_code": response.status_code, "response": response.json()}
+
+def send_email(api_id, from_email, from_name, reply_to_email, subject, contents, send_at):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_id}"
+    }
+    # Construct the 'personalizations' field
+    personalizations = [
+        {
+            "form": {
+                "email": from_email,
+                "name": from_name
+            },
+            "to":{
+                
+            }
+        }
+    ]
+    data = {
+        "personalizations": personalizations,
+        "from": {
+            "email": from_email,
+            "name": from_name
+        },
+        "reply_to": {
+            "email": reply_to_email
+        },
+        "subject": subject,
+        "content": [
+            {
+                "type": "text/html",
+                "value": contents
+            }
+        ],
+        "tracking_settings": {
+            "click_tracking": {
+                "enable": True,
+                "enable_text": False
+            },
+            "open_tracking": {
+                "enable": True,
+                "substitution_tag": "%open-track%"
+            },
+            "subscription_tracking": {
+                "enable": False
+            }
+        }
+    }
+    if send_at:
+        data["send_at"] = send_at
+    response = requests.post("https://api.sendgrid.com/v3/mail/send", headers=headers, data=json.dumps(data))
+    return response
