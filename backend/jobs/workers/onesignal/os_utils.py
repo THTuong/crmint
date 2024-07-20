@@ -108,14 +108,10 @@ def send_email(api_id, from_email, from_name, reply_to_email, subject, contents)
     
     # Extract email addresses from the segment
     message.from_email = From(email=from_email, name=from_name)
-
-    # message.reply_to = ReplyTo(
-    #     email="customer_service@example.com",
-    #     name="Example Customer Service Team"
-    # )
     if(reply_to_email):
         message.reply_to = ReplyTo(email=reply_to_email)
     message.subject = Subject(subject)
+    contents = contents.replace('\\"', '"')
     message.content = [Content(mime_type="text/html", content=contents)]
 
     sendgrid_client = SendGridAPIClient(api_id)
