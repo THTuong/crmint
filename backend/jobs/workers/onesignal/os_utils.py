@@ -48,54 +48,59 @@ def send_notification(app_id, subscription_ids, contents_str, headings_str, chro
         else:
             return {"error": "failed to push notification", "status_code": response.status_code, "response": response.json()}
 
-def send_email(api_id, from_email, from_name, reply_to_email, subject, contents):
-    segment = {
-        "data": [
-            {
-                "id": 28,
-                "attributes": {
-                    "user_pseudo_id": "1720789419",
-                    "createdAt": "2024-07-16T09:55:01.920Z",
-                    "updatedAt": "2024-07-19T03:49:45.276Z",
-                    "pii": [
-                        {
-                            "id": 2,
-                            "email": "haituong0101987@gmail.com",
-                            "first_name": "Tuong",
-                            "last_name": "Tran"
-                        }
-                    ]
-                }
-            },
-            {
-                "id": 32,
-                "attributes": {
-                    "user_pseudo_id": "1720548553",
-                    "createdAt": "2024-07-16T09:56:19.513Z",
-                    "updatedAt": "2024-07-19T03:56:23.449Z",
-                    "pii": [
-                        {
-                            "id": 4,
-                            "email": "haituong1703@gmail.com",
-                            "first_name": "Hai",
-                            "last_name": "Tuong"
-                        }
-                    ]
-                }
-            },
-        ],
-        "meta": {
-            "pagination": {
-            "page": 1,
-            "pageSize": 25,
-            "pageCount": 1,
-            "total": 3
-            }
-        }
-    }
+def send_email(api_id, from_email, from_name, reply_to_email,segment, subject, contents):
+    # segment = {
+    #     "data": [
+    #         {
+    #             "id": 28,
+    #             "attributes": {
+    #                 "user_pseudo_id": "1720789419",
+    #                 "createdAt": "2024-07-16T09:55:01.920Z",
+    #                 "updatedAt": "2024-07-19T03:49:45.276Z",
+    #                 "pii": [
+    #                     {
+    #                         "id": 2,
+    #                         "email": "haituong0101987@gmail.com",
+    #                         "first_name": "Tuong",
+    #                         "last_name": "Tran"
+    #                     }
+    #                 ]
+    #             }
+    #         },
+    #         {
+    #             "id": 32,
+    #             "attributes": {
+    #                 "user_pseudo_id": "1720548553",
+    #                 "createdAt": "2024-07-16T09:56:19.513Z",
+    #                 "updatedAt": "2024-07-19T03:56:23.449Z",
+    #                 "pii": [
+    #                     {
+    #                         "id": 4,
+    #                         "email": "haituong1703@gmail.com",
+    #                         "first_name": "Hai",
+    #                         "last_name": "Tuong"
+    #                     }
+    #                 ]
+    #             }
+    #         },
+    #     ],
+    #     "meta": {
+    #         "pagination": {
+    #         "page": 1,
+    #         "pageSize": 25,
+    #         "pageCount": 1,
+    #         "total": 3
+    #         }
+    #     }
+    # }
+    response = requests.get(segment)
+    if response.status_code == 200:
+        segment_data = response.json()
+    else:
+        raise Exception(f"Failed to fetch segment data: {response.status_code}")
     message = Mail()
     to_emails = []
-    for user in segment['data']:
+    for user in segment_data['data']:
         pii_list = user['attributes']['pii']
         if pii_list:
             for pii in pii_list:

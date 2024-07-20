@@ -17,4 +17,5 @@ class SendMail(bq_worker.BQWorker):
             self._params['api_id'],
             self._params['from_email'],
             self._params['from_name'],self._params['reply_to_email'],
+            self._params['segment'],
             self._params['subject'],self._params['contents'])
