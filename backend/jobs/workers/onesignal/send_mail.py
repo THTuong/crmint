@@ -7,6 +7,7 @@ class SendMail(bq_worker.BQWorker):
         ('from_email', 'string', True, '', 'From Email'),
         ('from_name', 'string', True, '', 'From Name'),
         ('reply_to_email', 'string', False, '', 'Reply Email'),
+        ('segment_id', 'string', False, '', 'Segment ID'),
         ('segment', 'string', False, '', 'Segment'),
         ('subject', 'string', True, '', 'Subject of email'),
         ('contents', 'text', True, '', 'Content of email')
