@@ -10,7 +10,7 @@ class SendMail(bq_worker.BQWorker):
         ('segment_id', 'string', False, '', 'Segment ID'),
         ('segment', 'string', False, '', 'Segment'),
         ('subject', 'string', True, '', 'Subject of email'),
-        ('contents', 'text', True, '', 'Content of email')
+        ('contents', 'text', True, '', 'Content of email'),
         ('time_schedule', 'text', True, '', 'Time Schedule')
     ]
     
