@@ -11,6 +11,7 @@ class SendMail(bq_worker.BQWorker):
         ('segment', 'string', False, '', 'Segment'),
         ('subject', 'string', True, '', 'Subject of email'),
         ('contents', 'text', True, '', 'Content of email')
+        ('time_schedule', 'text', True, '', 'Time Schedule')
     ]
     
     def _execute(self) -> None:
