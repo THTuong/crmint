@@ -4,14 +4,14 @@ from jobs.workers.onesignal import os_utils
 class SendMail(bq_worker.BQWorker):
     PARAMS = [
         ('api_id', 'string', True, '', 'Send Grid API'),
-        ('from_email', 'string', True, '', 'From Email'),
-        ('from_name', 'string', True, '', 'From Name'),
+        ('from_email', 'string', False, '', 'From Email'),
+        ('from_name', 'string', False, '', 'From Name'),
         ('reply_to_email', 'string', False, '', 'Reply Email'),
         ('segment_id', 'string', False, '', 'Segment ID'),
         ('segment', 'string', False, '', 'Segment'),
-        ('subject', 'string', True, '', 'Subject of email'),
-        ('contents', 'text', True, '', 'Content of email'),
-        ('time_schedule', 'text', True, '', 'Time Schedule')
+        ('subject', 'string', False, '', 'Subject of email'),
+        ('contents', 'text', False, '', 'Content of email'),
+        ('time_schedule', 'text', False, '', 'Time Schedule')
     ]
     
     def _execute(self) -> None:
