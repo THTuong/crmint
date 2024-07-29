@@ -5,7 +5,7 @@ class CreateCustomAudience(bq_worker.BQWorker):
     PARAMS = [
         ('advertiser_id', 'string', True, '', 'Advertiser ID'),
         ('custom_audience_name', 'string', True, '', 'Audience Name'),
-        ('segment', 'string', True, '', 'Segment')
+        ('segment', 'string', True, '', 'Segment'),
         ('token', 'string', True, '', 'Token')
     ]
     
