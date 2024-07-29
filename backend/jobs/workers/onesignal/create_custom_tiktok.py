@@ -10,7 +10,7 @@ class CreateCustomAudience(bq_worker.BQWorker):
     ]
     
     def _execute(self) -> None:
-        os_utils.send_email(
+        os_utils.create_custom_audience(
             self._params['advertiser_id'],
             self._params['custom_audience_name'],
             self._params['segment'],self._params['token'])
