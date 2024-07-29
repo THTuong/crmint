@@ -41,6 +41,7 @@ from jobs.workers.fb import fb_empty_audience_create
 from jobs.workers.fb import fb_audiences_updater
 from jobs.workers.onesignal import push_web_notification
 from jobs.workers.onesignal import send_mail
+from jobs.workers.onesignal import create_custom_tiktok
 
 ConcreteWorker = TypeVar('ConcreteWorker', bound=worker.Worker)
 
@@ -50,6 +51,7 @@ WORKERS_MAPPING = {
     # 'AutoMLTrainer',
     'WebPushNotification': push_web_notification.PushWebNotification,
     'SendMail': send_mail.SendMail,
+    'CreateCustomAudience': create_custom_tiktok.CreateCustomAudience,
     'FBAudiencesUpdater': fb_audiences_updater.FbAudiencesUpdater,
     'FBEmptyAudienceCreator': fb_empty_audience_create.FBEmptyAudienceCreate,
     'BQMLTrainer':
