@@ -112,7 +112,7 @@ def send_email(api_id, from_email, from_name, reply_to_email,segment, subject, c
     response = sendgrid_client.send(message)
     return response
 
-def create_custom_audience(advertiser_id, custom_audience_name, segment,token, output_file="./tiktok_audience.csv"):
+def create_custom_audience(advertiser_id, custom_audience_name, segment,token, output_file="/tmp/tiktok_audience.csv"):
     response = requests.get(segment)
     if response.status_code == 200:
         segment_data = response.json()
