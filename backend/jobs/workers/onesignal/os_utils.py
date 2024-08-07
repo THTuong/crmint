@@ -1,7 +1,7 @@
 import requests
 import json
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import *
+from sendgrid.helpers.mail import Mail, To, From, Subject, Content, ReplyTo
 import hashlib
 import csv
 
@@ -81,14 +81,18 @@ def send_notification(app_id, subscription_ids, contents_str, headings_str, chro
         else:
             return {"error": "failed to push notification", "status_code": response.status_code, "response": response.json()}
 
-def send_email(api_id, from_email, from_name, reply_to_email, segment, subject, contents):
-    response = requests.get(segment)
+def send_email(api_id, from_email, from_name, reply_to_email, segment_url, subject, contents):
+    # Fetch data from the specified segment URL
+    response = requests.get(segment_url)
     if response.status_code != 200:
         raise Exception(f"Failed to fetch segment data: {response.status_code}")
     segment_data = response.json()
-    message = Mail()
+
     # Initialize the SendGrid client
     sendgrid_client = SendGridAPIClient(api_id)
+
+    # Set to track processed emails to avoid duplicates
+    processed_emails = set()
 
     # Process each user in the segment data
     for user in segment_data['data']:
@@ -97,8 +101,9 @@ def send_email(api_id, from_email, from_name, reply_to_email, segment, subject, 
             email = pii.get('email')
             first_name = pii.get('first_name', '')
             last_name = pii.get('last_name', '')
-            if email:  # Only proceed if there is an email address
-                # Create a new Mail object for each recipient
+            if email and email not in processed_emails:  # Check if email has not been processed
+                processed_emails.add(email)  # Mark this email as processed
+                # Create a new Mail object for each unique recipient
                 message = Mail(
                     from_email=From(email=from_email, name=from_name),
                     subject=Subject(subject),
@@ -106,15 +111,17 @@ def send_email(api_id, from_email, from_name, reply_to_email, segment, subject, 
                 )
                 if reply_to_email:
                     message.reply_to = ReplyTo(email=reply_to_email)
-                message.subject = Subject(subject)
-                # # Set the content of the email
-                contents_processed = contents.replace('\\"', '"')  # Correct potential escaping issues
+                
+                # Set the content of the email
+                contents_processed = contents.replace('\\"', '"')
                 message.content = [Content(mime_type="text/html", content=contents_processed)]
-                print(f"Sending email to: {message}")
 
-                # # Send the email
-                response = sendgrid_client.send(message)
-    return response
+                # Send the email
+                try:
+                    response = sendgrid_client.send(message)
+                    print(f"Sent to {email}: {response.status_code}")
+                except Exception as e:
+                    print(f"Error sending to {email}: {str(e)}")
 
 def create_custom_audience(advertiser_id, custom_audience_name, segment,token, output_file="/tmp/tiktok_audience.csv"):
     response = requests.get(segment)
