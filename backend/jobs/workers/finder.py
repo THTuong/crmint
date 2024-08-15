@@ -41,6 +41,7 @@ from jobs.workers.fb import fb_create_custom_audience
 from jobs.workers.onesignal import push_web_notification
 from jobs.workers.onesignal import send_mail
 from jobs.workers.onesignal import create_custom_tiktok
+from jobs.workers.google import create_customer_list
 
 ConcreteWorker = TypeVar('ConcreteWorker', bound=worker.Worker)
 
@@ -51,7 +52,8 @@ WORKERS_MAPPING = {
     'WebPushNotification': push_web_notification.PushWebNotification,
     'SendMail': send_mail.SendMail,
     'CreateCustomAudienceTiktok': create_custom_tiktok.CreateCustomAudience,
-    'CreateCustomAudienceFB': fb_create_custom_audience.FBCreateCustomAudience,
+    'CreateCustomAudienceFacebook': fb_create_custom_audience.FBCreateCustomAudience,
+    'CreateCustomAudienceGoogle': create_customer_list.GoogleCreateCustomList,
     'BQMLTrainer':
         bq_ml_trainer.BQMLTrainer,
     'BQQueryLauncher':

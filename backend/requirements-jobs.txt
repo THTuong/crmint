@@ -182,3 +182,4 @@ facebook-business==19.0.3
 sendgrid==6.11.0
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
+google-ads
